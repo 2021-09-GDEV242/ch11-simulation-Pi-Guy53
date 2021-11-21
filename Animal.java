@@ -124,4 +124,21 @@ public abstract class Animal
      * @return the breeding age of this animal
      */
     abstract protected int getBreedingAge();
+    
+    /**
+     * Returns the maximum age for this animal
+     * @return the max age of this animal
+     */
+    abstract protected int getMaxAge();
+    
+        /**
+     * Increase the age. This could result in the fox's death.
+     */
+    protected void incrementAge()
+    {
+        age++;
+        if(age > getMaxAge()) {
+            setDead();
+        }
+    }
 }
