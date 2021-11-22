@@ -4,8 +4,8 @@ import java.util.Random;
 
 /**
  * A Snake is a predator that will eat both foxes and rabbits
- * they do not live as long as foxes, but will breed more,
- * and are less likely to starve
+ * they do not live as long as foxes, but will breed less,
+ * and are less likely to starve.
  *
  * @author Mihail Vaporakis
  * @version 11-22-2021
