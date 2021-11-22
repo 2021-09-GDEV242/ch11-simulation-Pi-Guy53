@@ -13,25 +13,27 @@ import java.util.Random;
 public class Snake extends Animal
 {
     // Characteristics shared by all Snakes (class variables).
-    
+
     // The age at which a snake can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a snake can live.
     private static final int MAX_AGE = 75;
     // The likelihood of a snake breeding.
-    private static final double BREEDING_PROBABILITY = 0.10;
+    private static final double BREEDING_PROBABILITY = 0.03;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 3;
+    private static final int MAX_LITTER_SIZE = 1;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a snake can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 16;
     //The food value of a single fox
     private static final int FOX_FOOD_VLAUE = 7;
+    // The probablity that a snake will eat a fox
+    private static final double FOX_EAT_CHANCE = 0.15;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
-    
+
     // The snake's food level, which is increased by eating rabbits or foxes.
     private int foodLevel;
 
@@ -55,7 +57,7 @@ public class Snake extends Animal
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
-    
+
     /**
      * This is what the snake does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
@@ -85,7 +87,7 @@ public class Snake extends Animal
             }
         }
     }
-    
+
     /**
      * Make this snake more hungry. This could result in the snake's death.
      */
@@ -96,7 +98,7 @@ public class Snake extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Look for rabbits adjacent to the current location.
      * Only the first live rabbit is eaten.
@@ -110,7 +112,7 @@ public class Snake extends Animal
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            
+
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if(rabbit.isAlive()) { 
@@ -119,19 +121,23 @@ public class Snake extends Animal
                     return where;
                 }
             }
-            
+
             if(animal instanceof Fox) {
-                Fox fox = (Fox) animal;
-                if(fox.isAlive()) {
-                    fox.setDead();
-                    foodLevel = FOX_FOOD_VLAUE;
-                    return where;
+
+                if(rand.nextDouble() <= FOX_EAT_CHANCE)
+                {
+                    Fox fox = (Fox) animal;
+                    if(fox.isAlive()) {
+                        fox.setDead();
+                        foodLevel = FOX_FOOD_VLAUE;
+                        return where;
+                    }
                 }
             }
         }
         return null;
     }
-    
+
     /**
      * Check whether or not this snake is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -150,7 +156,7 @@ public class Snake extends Animal
             newSnakes.add(young);
         }
     }
-    
+
     /**
      * @return the breeding age of this animal
      */
@@ -158,7 +164,7 @@ public class Snake extends Animal
     {
         return BREEDING_AGE;
     }
-    
+
     /**
      * @return the maxium age for this animal
      */
@@ -166,7 +172,7 @@ public class Snake extends Animal
     {
         return MAX_AGE;
     }
-    
+
     /**
      * @return the breeding probability
      */
@@ -174,7 +180,7 @@ public class Snake extends Animal
     {
         return BREEDING_PROBABILITY;
     }
-    
+
     /**
      * @return the maximum litter size
      */
