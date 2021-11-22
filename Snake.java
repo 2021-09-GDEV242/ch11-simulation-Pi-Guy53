@@ -17,16 +17,16 @@ public class Snake extends Animal
     // The age at which a snake can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a snake can live.
-    private static final int MAX_AGE = 75;
+    private static final int MAX_AGE = 120;
     // The likelihood of a snake breeding.
-    private static final double BREEDING_PROBABILITY = 0.03;
+    private static final double BREEDING_PROBABILITY = 0.02;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 1;
+    private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a snake can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 16;
+    private static final int RABBIT_FOOD_VALUE = 13;
     //The food value of a single fox
-    private static final int FOX_FOOD_VLAUE = 7;
+    private static final int FOX_FOOD_VLAUE = 14;
     // The probablity that a snake will eat a fox
     private static final double FOX_EAT_CHANCE = 0.15;
     // A shared random number generator to control breeding.
